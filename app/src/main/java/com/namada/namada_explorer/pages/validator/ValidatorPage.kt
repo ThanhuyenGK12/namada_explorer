@@ -83,16 +83,11 @@ fun ValidatorPage(
                                 horizontalAlignment = Alignment.Start,
                             ) {
                                 Text(
-                                    text = it.moniker,
+                                    text = it.moniker ?: it.operatorAddress ?: return@Column,
                                     fontWeight = FontWeight.Bold,
                                     textAlign = TextAlign.Left,
                                     modifier = Modifier
                                         .fillMaxWidth()
-                                )
-
-                                Text(
-                                    text = "${it.votingPower.formatWithCommas} NAAN",
-                                    fontSize = 13.sp
                                 )
                             }
                         }

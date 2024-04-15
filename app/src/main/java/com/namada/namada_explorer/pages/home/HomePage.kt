@@ -57,11 +57,6 @@ fun HomePage(viewModel: HomeViewModel = hiltViewModel()) {
                     value = viewModel.uiState.validatorCount.toString(),
                     modifier = Modifier.fillMaxWidth()
                 )
-                CardData(
-                    title = "Voting power",
-                    value = "${viewModel.uiState.votingPower.formatNumber} NAAN",
-                    modifier = Modifier.fillMaxWidth()
-                )
             }
         }
     }

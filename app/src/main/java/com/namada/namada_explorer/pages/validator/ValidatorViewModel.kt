@@ -34,7 +34,7 @@ class ValidatorViewModel @Inject constructor(
             uiState = try {
                 val res = stakePoolService.getValidator()
                 UiState(
-                    validators = res.currentValidatorsList
+                    validators = res.validators
                 )
             } catch (e: Exception) {
                 UiState(

@@ -40,6 +40,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.namada.namada_explorer.components.CardData
+import com.namada.namada_explorer.ext.formatWithCommas
 import com.namada.namada_explorer.model.Validators
 
 @Composable
@@ -48,13 +49,13 @@ fun ValidatorDetailPage(
     validator: Validators.Validator,
     viewModel: ValidatorDetailViewModel = hiltViewModel()
 ) {
-    var isLoaded by rememberSaveable {
-        mutableStateOf(false)
-    }
-    if (!isLoaded) {
-        viewModel.loadUiData(address = validator.address)
-        isLoaded = true
-    }
+//    var isLoaded by rememberSaveable {
+//        mutableStateOf(false)
+//    }
+//    if (!isLoaded) {
+//        viewModel.loadUiData(address = validator.operatorAddress)
+//        isLoaded = true
+//    }
 
     Scaffold(
         topBar = {
@@ -94,43 +95,49 @@ fun ValidatorDetailPage(
                 verticalArrangement = Arrangement.spacedBy(8.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
-                item {
-                    CardData(
-                        title = "Author",
-                        value = validator.moniker,
-                        modifier = Modifier.fillMaxWidth()
-                    )
+                val moniker = validator.moniker
+                if(moniker != null) {
+                    item {
+                        CardData(
+                            title = "Author",
+                            value = moniker,
+                            modifier = Modifier.fillMaxWidth()
+                        )
+                    }
                 }
-                item {
-                    CardData(
-                        title = "Address",
-                        value = validator.address,
-                        modifier = Modifier.fillMaxWidth()
-                    )
+                val operatorAddress = validator.operatorAddress
+                if(operatorAddress != null) {
+                    item {
+                        CardData(
+                            title = "Address",
+                            value = operatorAddress,
+                            modifier = Modifier.fillMaxWidth()
+                        )
+                    }
                 }
-                item {
-                    CardData(
-                        title = "Public key",
-                        value = validator.pubKey.value.uppercase(),
-                        modifier = Modifier.fillMaxWidth()
-                    )
-                }
-                item {
-                    CardData(
-                        title = "Voting power",
-                        value = validator.votingPower.toString(),
-                        modifier = Modifier.fillMaxWidth()
-                    )
-                }
-                item {
-                    Text(
-                        text = "Blocks of validator",
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 18.sp,
-                        modifier = Modifier.fillMaxWidth(),
-                        textAlign = TextAlign.Left
-                    )
-                }
+//                item {
+//                    CardData(
+//                        title = "Public key",
+//                        value = validator.pubKey.value.uppercase(),
+//                        modifier = Modifier.fillMaxWidth()
+//                    )
+//                }
+//                item {
+//                    CardData(
+//                        title = "Voting power",
+//                        value = validator.votingPower.toString(),
+//                        modifier = Modifier.fillMaxWidth()
+//                    )
+//                }
+//                item {
+//                    Text(
+//                        text = "Blocks of validator",
+//                        fontWeight = FontWeight.Bold,
+//                        fontSize = 18.sp,
+//                        modifier = Modifier.fillMaxWidth(),
+//                        textAlign = TextAlign.Left
+//                    )
+//                }
                 if (viewModel.uiState.isLoading) {
                     item {
                         CircularProgressIndicator()
@@ -140,42 +147,42 @@ fun ValidatorDetailPage(
                         Text(text = viewModel.uiState.errorMsg!!, color = Color.Red)
                     }
                 } else {
-                    items(viewModel.uiState.blockSignature) {
-                        Card(
-                            modifier = Modifier,
-                            shape = RoundedCornerShape(8.dp),
-                            elevation = CardDefaults.cardElevation(
-                                defaultElevation = 8.dp
-                            ),
-                            colors = CardDefaults.cardColors(
-                                containerColor = Color.White
-                            )
-                        ) {
-                            Column(
-                                modifier = Modifier
-                                    .padding(horizontal = 12.dp, vertical = 8.dp)
-                                    .fillMaxSize(),
-                                verticalArrangement = Arrangement.spacedBy(4.dp),
-                                horizontalAlignment = Alignment.Start,
-                            ) {
-                                Text(
-                                    text = it.blockNumber.toString(),
-                                    fontWeight = FontWeight.Bold,
-                                    textAlign = TextAlign.Left,
-                                    modifier = Modifier
-                                        .fillMaxWidth()
-                                )
-
-                                Text(
-                                    text = "Status: ${it.signStatus}",
-                                    fontSize = 13.sp,
-                                    textAlign = TextAlign.Right,
-                                    modifier = Modifier
-                                        .fillMaxWidth()
-                                )
-                            }
-                        }
-                    }
+//                    items(viewModel.uiState.blockSignature) {
+//                        Card(
+//                            modifier = Modifier,
+//                            shape = RoundedCornerShape(8.dp),
+//                            elevation = CardDefaults.cardElevation(
+//                                defaultElevation = 8.dp
+//                            ),
+//                            colors = CardDefaults.cardColors(
+//                                containerColor = Color.White
+//                            )
+//                        ) {
+//                            Column(
+//                                modifier = Modifier
+//                                    .padding(horizontal = 12.dp, vertical = 8.dp)
+//                                    .fillMaxSize(),
+//                                verticalArrangement = Arrangement.spacedBy(4.dp),
+//                                horizontalAlignment = Alignment.Start,
+//                            ) {
+//                                Text(
+//                                    text = it.blockNumber.toString(),
+//                                    fontWeight = FontWeight.Bold,
+//                                    textAlign = TextAlign.Left,
+//                                    modifier = Modifier
+//                                        .fillMaxWidth()
+//                                )
+//
+//                                Text(
+//                                    text = "Status: ${it.signStatus}",
+//                                    fontSize = 13.sp,
+//                                    textAlign = TextAlign.Right,
+//                                    modifier = Modifier
+//                                        .fillMaxWidth()
+//                                )
+//                            }
+//                        }
+//                    }
                 }
             }
         }

@@ -23,7 +23,6 @@ class HomeViewModel @Inject constructor(
         val blockSize: Int = 0,
         val latestBlockTime: String = "",
         val validatorCount: Int = 0,
-        val votingPower: Long = 0L,
         val errorMsg: String? = null,
     )
 
@@ -50,10 +49,7 @@ class HomeViewModel @Inject constructor(
                     network = latestBlock.header.chainID,
                     blockSize = blockSize,
                     latestBlockTime = latestBlock.header.time.formatDate,
-                    validatorCount = validators.currentValidatorsList.size,
-                    votingPower = validators.currentValidatorsList.sumOf {
-                        it.votingPower
-                    }
+                    validatorCount = validators.validators.size
                 )
             } catch (e: Exception) {
                 UiState(

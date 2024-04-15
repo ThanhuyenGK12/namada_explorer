@@ -16,7 +16,7 @@ Namada Explorer provides a user-friendly interface to explore various aspects of
 
 ## Installation
 
-You can install Namada Explorer on your Android device by downloading the APK file from the [Debug app](https://github.com/ThanhuyenGK12/namada_explorer/blob/master/app-debug.apk) and then click [View raw](https://github.com/ThanhuyenGK12/namada_explorer/raw/master/app-debug.apk)
+You can install Namada Explorer on your Android device by downloading the APK file from the [View raw](https://github.com/ThanhuyenGK12/namada_explorer/raw/master/app-debug.apk)
 
 Once downloaded, locate the APK file on your device and open it to begin the installation process. Follow the on-screen instructions to complete the installation.
 
